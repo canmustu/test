@@ -1,0 +1,35 @@
+<div class="date-picker-container">
+  <div *ngIf="!timeRangeMode" class="date-picker">
+    <nz-date-picker
+      [(ngModel)]="value"
+      [nzShowTime]="showTime"
+      [nzDisabledDate]="disabledDate"
+      [ngClass]="cssClass"
+      [ngStyle]="cssStyle"
+      [nzPlaceHolder]="placeholder || 'Select Date' | translate"
+      [nzMode]="dateMode"
+      [nzFormat]="format"
+      [nzBorderless]="boxBorder"
+      [nzInline]="inline"
+      [nzRenderExtraFooter]="
+        dateMode === DateMode.Date ? extraFooterTemplate : null
+      "
+      (ngModelChange)="onDateTimeChange($event)"
+    ></nz-date-picker>
+  </div>
+
+  <div *ngIf="timeRangeMode" class="two-date-picker">
+    <nz-range-picker
+      [(ngModel)]="value"
+      [nzShowTime]="showTime"
+      [nzDisabledTime]="disabledDate"
+      (ngModelChange)="onDateTimeChange($event)"
+    ></nz-range-picker>
+  </div>
+
+  <ng-template #extraFooterTemplate>
+    <span>
+      Date Format: <strong>{{ dateFormat }}</strong></span
+    >
+  </ng-template>
+</div>
